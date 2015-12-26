@@ -127,7 +127,7 @@ var elapsed = '0.0';
 //updates the EXP bar
 //function updateEXPBar() {
 //	var exp =  $("#exp");
-//	expPercent = Math.floor(curEXP * 100 / nextEXP);
+// expPercent = Math.floor(curEXP * 100 / nextEXP);
 //	$(exp).html(String(nextEXP-curEXP));
 //	if(expPercent > 100){
 //		$(exp).parent().css("width","100%");
@@ -147,7 +147,7 @@ function exp(actionData) {
 	if (extraExpNeeded < 0) {
 		extraExpNeeded = 0;
 	}
-	expPercent = (Math.round(curEXP/nextEXP)*100);//Fixes 0% exp bug when exp is typed/queried
+	expPercent = Math.floor(curEXP * 100 / nextEXP); //Fixes 0% exp bug when exp is typed/queried
 	var text = buildSpan(cga_dark_green, "Exp: ") + buildSpan(cga_dark_cyan, String(actionData.Exp)) + buildSpan(cga_dark_green, " Level: ") + buildSpan(cga_dark_cyan, String(actionData.Level)) + buildSpan(cga_dark_green, " Exp needed for next level: ") + buildSpan(cga_dark_cyan, String(extraExpNeeded) + " (" + String(actionData.TotalExpForNextLevel) + ") [" + expPercent + "%]") + "<br>";
 	addMessageRaw(text, false, true);
 }
