@@ -2595,10 +2595,13 @@ function CastBuff() {
 	
 	if (RunOnKillEnabled == 1) {
 		if (RunOnKillState == 1)   {
-	  // Pre Rest Commands
-		 RunOnKillReverseDirections = String(ScriptRunDirection);	
-		 RunOnKillReverseDirections.split(",").forEach(function(RunOnKillDirections){
-		 MoveClick(reverseDirection(RunOnKillReverseDirections));	  
+	  // Post Rest Commands
+		PostRestCmd.split(",").forEach(function(PostRestCommands){
+		 MoveClick(PostRestCommands);	  
+		 });			
+		RunOnKillReverseDirections = ScriptRunDirection;	
+		 RunOnKillReverseDirections.split(",").reverse().forEach(function(RunOnKillDirections){
+		 MoveClick(reverseDirection(RunOnKillDirections));	  
 		 sendMessageDirect("");
 		RunOnKillState = 0
 		 });
@@ -2804,9 +2807,14 @@ window.gainExperience = function(actionData) {
 	//updateEXPBar();
 	if (RunOnKillEnabled == 1){
 		if (RunOnKillState == 0) {
-			 RunOnKillTempDirections = String(ScriptRunDirection);
+				 // Pre Rest Commands
+		  PreRestCmd.split(",").forEach(function(PreRestCommands){
+		 MoveClick(PreRestCommands);	  
+		 });
+		 //End Pre Rest Commands
+			RunOnKillTempDirections = ScriptRunDirection;
 			 RunOnKillTempDirections.split(",").forEach(function(RunOnKillDirections){
-			sendMessageDirect(RunOnKillTempDirections);
+			sendMessageDirect(RunOnKillDirections);
 			sendMessageDirect('rest');
 			setTimeout(function() { RunOnKillState = 1; }, RestTimeAfterRunOnKill);
 			 });
