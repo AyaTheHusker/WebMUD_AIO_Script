@@ -2595,19 +2595,20 @@ function CastBuff() {
 	
 	if (RunOnKillEnabled == 1) {
 		if (RunOnKillState == 1)   {
-	  // Post Rest Commands
+	  	// Post Rest Commands
 		PostRestCmd.split(",").forEach(function(PostRestCommands){
-		 MoveClick(PostRestCommands);	  
-		 });			
+		MoveClick(PostRestCommands);	  
+		 });
+        // End Post Rest Commands		 
 		RunOnKillReverseDirections = ScriptRunDirection;	
 		 RunOnKillReverseDirections.split(",").reverse().forEach(function(RunOnKillDirections){
 		 MoveClick(reverseDirection(RunOnKillDirections));	  
 		 sendMessageDirect("");
-		RunOnKillState = 0
 		 });
+		RunOnKillState = 0
 		}
-		 //End Pre Rest Commands	}	
-	}
+		 	}	
+	
 	$('#RunOnKillFrame').text(RunOnKillFrame);
 
     // retrigger
@@ -2807,17 +2808,19 @@ window.gainExperience = function(actionData) {
 	//updateEXPBar();
 	if (RunOnKillEnabled == 1){
 		if (RunOnKillState == 0) {
-				 // Pre Rest Commands
-		  PreRestCmd.split(",").forEach(function(PreRestCommands){
-		 MoveClick(PreRestCommands);	  
-		 });
-		 //End Pre Rest Commands
+		
 			RunOnKillTempDirections = ScriptRunDirection;
 			 RunOnKillTempDirections.split(",").forEach(function(RunOnKillDirections){
 			sendMessageDirect(RunOnKillDirections);
+						
+			 });
+			 		 // Pre Rest Commands
+		 PreRestCmd.split(",").forEach(function(PreRestCommands){
+		 MoveClick(PreRestCommands);	  
+		 });
+		 //End Pre Rest Commands
 			sendMessageDirect('rest');
 			setTimeout(function() { RunOnKillState = 1; }, RestTimeAfterRunOnKill);
-			 });
 		}
 	}
 }
